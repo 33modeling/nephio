@@ -41,7 +41,9 @@ from provisioning_request_validation_controller import (
 def run_flask():
     app.run(host='0.0.0.0', port=5000)
 
-threading.Thread(target=run_flask, daemon=True).start
+
+threading.Thread(target=run_flask, daemon=True).start()
+
 
 @kopf.on.startup()
 def configure(settings: kopf.OperatorSettings, memo: kopf.Memo, **_):
@@ -175,4 +177,3 @@ async def create_fn(spec, logger, status, patch: kopf.Patch, memo: kopf.Memo, **
 @kopf.on.probe(id="now")
 def get_current_timestamp(**kwargs):
     return datetime.datetime.now(datetime.timezone.utc).isoformat()
-
